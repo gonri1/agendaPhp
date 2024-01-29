@@ -23,32 +23,7 @@ function printAgenda(): string
     } else {
         $output .= "<p>Error al abrir el archivo.</p>";
     }
-    nuevaLinea();
     return $output;
-}
-
-
-//INSERTAR NUEVO CONTACTO
-
-function nuevaLinea()
-{
-
-    //Tratamos los datos para que no nos muestre mensaje de error el formulario
-
-    $nombre = isset($_POST["nombre"]) ? strip_tags(trim($_POST["nombre"])) : "";
-    $apellido1 = isset($_POST["apellido1"]) ? strip_tags(trim($_POST["apellido1"])) : "";
-    $apellido2 = isset($_POST["apellido2"]) ? strip_tags(trim($_POST["apellido2"])) : "";
-    $telefono = isset($_POST["telefono"]) ? strip_tags(trim($_POST["telefono"])) : "";
-    $email = isset($_POST["email"]) ? strip_tags(trim($_POST["email"])) : "";
-
-    // Si todos los valores estan establecidos, podemos introducir un nuevo contacto 
-
-    if ($nombre != "" && $apellido1 != "" && $apellido2 != "" && $telefono != "" && $email != "") {
-        $nuevaLinea = "$nombre, $apellido1, $apellido2, $telefono, $email";
-        $archivoTxt = fopen("fichero/fichero.txt", "a");
-        fputs($archivoTxt, trim($nuevaLinea) . PHP_EOL); // Agregamos un salto de línea
-        fclose($archivoTxt);
-    }
 }
 
 //Funcion que crea un select con los nombres de los contactos para tratarlos en printSelect.php
@@ -82,7 +57,7 @@ function printSelect(): string
 
 function printSelectDetete(): string
 {
-    $archivoTxt = fopen("fichero/fichero.txt", "r");//abrimos lectura
+    $archivoTxt = fopen("fichero/fichero.txt", "r"); //abrimos lectura
 
     // imprimimos en el html
 
@@ -99,9 +74,9 @@ function printSelectDetete(): string
 
     $output .= "</select>";
 
-    fclose($archivoTxt);//cerramos lectura
+    fclose($archivoTxt); //cerramos lectura
 
-    delete();//Llamamos a la funcion borrar
+    delete(); //Llamamos a la funcion borrar
 
     return $output;
 }
@@ -111,9 +86,9 @@ function printSelectDetete(): string
 
 function printSelectOption(): string
 {
-    $select = isset($_POST["select"]) ? $_POST["select"] : "";//Tratamos datos del select venido por $_POST
-    
-    $archivoTxt = fopen("fichero/fichero.txt", "r");//Abrimos lectura
+    $select = isset($_POST["select"]) ? $_POST["select"] : ""; //Tratamos datos del select venido por $_POST
+
+    $archivoTxt = fopen("fichero/fichero.txt", "r"); //Abrimos lectura
 
     // Imprimimos datos en Html
     $output = "";
@@ -133,7 +108,7 @@ function printSelectOption(): string
             $output .= "</div>";
         }
     }
-    fclose($archivoTxt);//cerramos lectura
+    fclose($archivoTxt); //cerramos lectura
 
     return $output;
 }
